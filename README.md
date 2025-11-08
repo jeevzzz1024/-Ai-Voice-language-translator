@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌍 Real-Time Language Translator Bot 🎙
 
 A simple and powerful Python app that listens to your voice 🎧, translates it instantly 🌐, and speaks it back 🔊 — breaking language barriers in real time!
@@ -117,3 +118,7 @@ Jeeva & Team
 If you like this project: ⭐ Star it on GitHub 📢 Share it with friends
 🧠 Keep building cool Python apps!
 
+=======
+# -Ai-Voice-language-translator
+🎙 A real-time language translator app built with Python and Streamlit. It listens to speech, converts it to text, translates between 100+ languages using Google Translate, and speaks the result aloud with gTTS — enabling fast, natural multilingual communication anytime, anywhere.
+>>>>>>> b488295cba78e5488a62ec70b80f0fb3cdf54b9e
