@@ -1,28 +1,27 @@
 import os
 import time
-import pygame
 import tempfile
 from gtts import gTTS
 import streamlit as st
 import speech_recognition as sr
 from googletrans import LANGUAGES, Translator
+from playsound import playsound
 
 # Global flag
 isTranslation = False
 
-# Initialize translator and audio
+# Initialize translator
 translator = Translator()
-pygame.mixer.init()
 
 # Create mapping between language names and codes
 language_mapping = {name: code for code, name in LANGUAGES.items()}
 
 def get_language_code(language_name):
+    """Return the language code for a given language name."""
     return language_mapping.get(language_name, language_name)
 
 def play_audio_gtts(text, lang):
     """Convert translated text to voice and safely play it."""
-    import tempfile
     import uuid
 
     try:
@@ -34,12 +33,7 @@ def play_audio_gtts(text, lang):
         tts.save(temp_filename)
 
         # Play the audio
-        pygame.mixer.music.load(temp_filename)
-        pygame.mixer.music.play()
-
-        # Wait for playback to finish
-        while pygame.mixer.music.get_busy():
-            time.sleep(0.1)
+        playsound(temp_filename)
 
     except Exception as e:
         st.error(f"Audio playback error: {str(e)}")
@@ -53,6 +47,7 @@ def play_audio_gtts(text, lang):
             pass  # Ignore if Windows still locks it briefly
 
 def main_process(output_placeholder, from_language, to_language):
+    """Handle real-time translation and playback."""
     global isTranslation
     recognizer = sr.Recognizer()
 
@@ -77,9 +72,9 @@ def main_process(output_placeholder, from_language, to_language):
                 play_audio_gtts(translated_text, to_language)
 
             except sr.UnknownValueError:
-                st.warning("your voice is very nice 😍...")
+                st.warning("😅 Could not understand. Please speak again.")
             except Exception as e:
-                st.error(f"your message translated: {str(e)}")
+                st.error(f"⚠ Error: {str(e)}")
                 isTranslation = False
 
 # Streamlit UI
