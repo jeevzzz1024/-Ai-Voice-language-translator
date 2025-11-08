@@ -1,7 +1,7 @@
 import os
 import time
 import tempfile
-from gtts import gTTS
+from gtts import gtts
 import streamlit as st
 import speech_recognition as sr
 from googletrans import LANGUAGES, Translator
